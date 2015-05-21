@@ -50,6 +50,7 @@ public class Main extends Window {
         g.setColor(Window.FONT_COLOR);
         g.drawString(message, 20, 20);
         
+        message = hero.getMagazine() + " / " + hero.getAmmo();
         hero.paint(g);
     	for(Bullet b : bullets) {
     		b.paint(g);
@@ -75,6 +76,9 @@ public class Main extends Window {
         	if (hero instanceof Hero) hero = new Zombie(hero.getxPos(), hero.getyPos());
         	else hero = new Hero(200, 600, 10, Color.CYAN);
         }
+        if(keyCode == Hero.RELOAD){
+        	hero.reload();
+        }
         	
     }
 
@@ -89,8 +93,11 @@ public class Main extends Window {
     }
 
 	public void mouseReleased(MouseEvent e) {
-    	bullets.add(new Bullet(hero.getxPos(), hero.getyPos(), e.getX(), e.getY()));
+    	if(hero.getMagazine() >= 1){
+		bullets.add(new Bullet(hero.getxPos(), hero.getyPos(), e.getX(), e.getY()));
 		//message = "(" + e.getX() + ", " + e.getY() + ")";
+    	hero.setMagazine(hero.getMagazine() -1);
+    	}
 	}
 
      public static void main(String args[]) {

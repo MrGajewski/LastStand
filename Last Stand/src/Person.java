@@ -13,6 +13,9 @@ public class Person {
 					baseSpeed	= 5,
 					burstSpeed	= 8;
 	private Color	color		= Color.WHITE;
+	private int magazine = 10;
+	private int ammo = 120;
+	private int MAXAMMO = 120;
 	
 	//Constructor
 	public Person() {
@@ -90,4 +93,28 @@ public class Person {
 		// TODO Auto-generated method stub
 		
 	}
+	public void reload(){
+		if(ammo >= 10){
+		magazine = 10;
+		ammo -= 10;
+		}
+	}
+	public int getMagazine() {
+		return magazine;
+	}
+
+	public void setMagazine(int magazine) {
+		this.magazine = magazine;
+	}
+
+	public int getAmmo() {
+		return ammo;
+	}
+
+	public void setAmmo(int ammo) {
+		this.ammo = ammo;
+	}
+
+
 }
+
