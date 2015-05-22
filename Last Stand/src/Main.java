@@ -75,7 +75,7 @@ public class Main extends Window {
         else if (keyCode == KeyEvent.VK_Z) {
         	if (hero instanceof Hero) hero = new Zombie(hero.getxPos(), hero.getyPos());
         	else hero = new Hero(200, 600, 10, Color.CYAN);
-        	//Temp fix to make zombies have no ammo so they can not shoot.
+        	//Temp fix to make zombies have no ammo so they can not shoot
         	hero.setAmmo(0);
         	hero.setMagazine(0);
         }
