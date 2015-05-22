@@ -15,8 +15,12 @@ public class Person {
 	private Color	color		= Color.WHITE;
 	private int magazine = 10;
 	private int ammo = 120;
-	private int MAXAMMO = 120;
+	private final int MAXAMMO = 120;
 	
+	public int getMAXAMMO() {
+		return MAXAMMO;
+	}
+
 	//Constructor
 	public Person() {
 		
