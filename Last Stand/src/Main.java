@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.TimerTask;
 
 import javax.swing.JFrame;
 
@@ -15,6 +17,8 @@ public class Main extends Window {
     private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
     private ArrayList<Zombie> zombies = new ArrayList<Zombie>();
     private static Cursor c = Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR);
+    private Random r = new Random();
+    private long tStart = 0;
 
     //Constructor
     public Main() {
@@ -94,12 +98,28 @@ public class Main extends Window {
         else if (keyCode == Hero.BURST)
         	hero.setBurst(false);
     }
+    public void mousePressed(final MouseEvent e) {
+    	tStart = System.currentTimeMillis();
+	}
 
 	public void mouseReleased(MouseEvent e) {
     	if(hero.getMagazine() >= 1){
-		bullets.add(new Bullet(hero.getxPos(), hero.getyPos(), e.getX(), e.getY()));
-		//message = "(" + e.getX() + ", " + e.getY() + ")";
-    	hero.setMagazine(hero.getMagazine() -1);
+    		if(hero.getAmmo() > 0) {
+				long tEnd = System.currentTimeMillis();
+		    	long tDelta = tEnd - tStart;
+		    	long elapsedSeconds = (long) (tDelta / 1000.0);
+		    	if(elapsedSeconds >= 1.25) {
+		    		for(int i = 0; i < 2; i++) {
+		    			bullets.add(new Bullet(hero.getxPos(), hero.getyPos(), e.getX() + r.nextInt(50), e.getY() + r.nextInt(50)));
+		    			bullets.add(new Bullet(hero.getxPos(), hero.getyPos(), e.getX() - r.nextInt(50), e.getY() - r.nextInt(50)));
+		    			hero.setMagazine(hero.getMagazine() -2);
+		    		}
+		    	} else {
+		    		bullets.add(new Bullet(hero.getxPos(), hero.getyPos(), e.getX(), e.getY()));
+		    		hero.setMagazine(hero.getMagazine() -1);
+		    	}
+			}
+    	
     	}
 	}
 
