@@ -19,8 +19,8 @@ public class Zombie extends Person {
 			setColor( Color.YELLOW );
 		} else {
 			//Small and fast zombie
-			setSize(8);
-			setSpeed(10);
+			setSize(10);
+			setSpeed(7);
 			setColor( Color.GREEN );
 		}
 		setxPos( xPos );

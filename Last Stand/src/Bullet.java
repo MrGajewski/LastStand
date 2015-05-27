@@ -29,4 +29,8 @@ public class Bullet extends Person {
 	public boolean isOffscreen() {
 		return getyPos() < 0;
 	}
+	public float[] getInfo(){
+		float[] info = {pX,pY,xpd,ypd};
+		return info;
+	}
 }

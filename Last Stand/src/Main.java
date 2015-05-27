@@ -43,8 +43,19 @@ public class Main extends Window {
     			i--;
     		}
     	}
-    	for(Zombie z : zombies) {
+    	for(int j=0;j<zombies.size();j++){
+    		Zombie z  = zombies.get(j);
     		z.update(hero.getxPos(), hero.getyPos());
+    		boolean hit = false;
+    		for(int i=0;i<bullets.size();i++){
+    			Bullet b = bullets.get(i);
+    			if(z.hit(b.getInfo())){
+    				hit = true;
+    			}
+    		}
+    		if(hit){
+    			zombies.remove(j);
+    		}
     	}
     }
 
@@ -85,6 +96,9 @@ public class Main extends Window {
         }
         if(keyCode == Hero.RELOAD){
         	hero.reload();
+        }
+        if(keyCode == 'C'){
+        	zombies.add(new Zombie(0,0));
         }
         	
     }
