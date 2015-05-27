@@ -118,21 +118,19 @@ public class Main extends Window {
 
 	public void mouseReleased(MouseEvent e) {
     	if(hero.getMagazine() >= 1){
-    		if(hero.getAmmo() > 0) {
-				long tEnd = System.currentTimeMillis();
-		    	long tDelta = tEnd - tStart;
-		    	long elapsedSeconds = (long) (tDelta / 1000.0);
-		    	if(elapsedSeconds >= 1.25) {
-		    		for(int i = 0; i < 2; i++) {
-		    			bullets.add(new Bullet(hero.getxPos(), hero.getyPos(), e.getX() + r.nextInt(50), e.getY() + r.nextInt(50)));
-		    			bullets.add(new Bullet(hero.getxPos(), hero.getyPos(), e.getX() - r.nextInt(50), e.getY() - r.nextInt(50)));
-		    			hero.setMagazine(hero.getMagazine() -2);
-		    		}
-		    	} else {
-		    		bullets.add(new Bullet(hero.getxPos(), hero.getyPos(), e.getX(), e.getY()));
-		    		hero.setMagazine(hero.getMagazine() -1);
+			long tEnd = System.currentTimeMillis();
+		    long tDelta = tEnd - tStart;
+		    long elapsedSeconds = (long) (tDelta / 1000.0);
+		    if(elapsedSeconds >= 1.25 && hero.getMagazine() >= 4) {
+		    	for(int i = 0; i < 2; i++) {
+			    		bullets.add(new Bullet(hero.getxPos(), hero.getyPos(), e.getX() + r.nextInt(50), e.getY() + r.nextInt(50)));
+			    		bullets.add(new Bullet(hero.getxPos(), hero.getyPos(), e.getX() - r.nextInt(50), e.getY() - r.nextInt(50)));
+			    		hero.setMagazine(hero.getMagazine() -2);
 		    	}
-			}
+		    } else {
+		    	bullets.add(new Bullet(hero.getxPos(), hero.getyPos(), e.getX(), e.getY()));
+		    	hero.setMagazine(hero.getMagazine() -1);
+		    }
     	
     	}
 	}
